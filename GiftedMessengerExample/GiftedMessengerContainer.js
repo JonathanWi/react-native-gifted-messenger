@@ -240,14 +240,14 @@ class GiftedMessengerContainer extends Component {
           displayNamesInsideBubble={true}
           styles={{
             bubbleLeft: {
-              marginRight: 70,
+              flex: 1,
               backgroundColor: 'transparent',
               alignSelf: 'flex-start',
             },
             bubble: {
               borderRadius: 0,
-              paddingLeft: 15,
-              paddingRight: 15,
+              paddingLeft: 7,
+              paddingRight: 0,
               paddingBottom: 10,
               paddingTop: 0,
             },
@@ -272,6 +272,13 @@ class GiftedMessengerContainer extends Component {
               height: 40,
               borderWidth: 1,
               borderColor: Global.COLOR.BORDER
+            },
+            imagePosition: {
+              height: 30,
+              width: 30,
+              alignSelf: 'flex-end',
+              marginLeft: 0,
+              marginRight: 8,
             },
             date: {
               fontSize: 12,
