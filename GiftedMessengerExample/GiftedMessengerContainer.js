@@ -13,6 +13,7 @@ import {
   Navigator,
 } from 'react-native';
 
+import Global from './global';
 var GiftedMessenger = require('react-native-gifted-messenger');
 var Communications = require('react-native-communications');
 
@@ -22,7 +23,6 @@ if (Platform.OS === 'android') {
   var ExtraDimensions = require('react-native-extra-dimensions-android');
   var STATUS_BAR_HEIGHT = ExtraDimensions.get('STATUS_BAR_HEIGHT');
 }
-
 
 class GiftedMessengerContainer extends Component {
 
@@ -86,8 +86,8 @@ class GiftedMessengerContainer extends Component {
       {
         text: "Yes, and I use Gifted Messenger!",
         name: 'Awesome Developer',
-        image: null,
-        position: 'right',
+        image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
+        position: 'left',
         date: new Date(2016, 3, 14, 13, 1),
         uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
       },
@@ -127,8 +127,10 @@ class GiftedMessengerContainer extends Component {
 
     // Your logic here
     // Send message.text to your server
-
+    message.position = 'left';
     message.uniqueId = Math.round(Math.random() * 10000); // simulating server-side unique id generation
+
+    console.log(message);
     this.setMessages(this._messages.concat(message));
 
     // mark the sent message as Seen
@@ -202,39 +204,145 @@ class GiftedMessengerContainer extends Component {
 
   render() {
     return (
-      <GiftedMessenger
-        ref={(c) => this._GiftedMessenger = c}
+      <View>
+        <View style={{height: 50, backgroundColor: Global.COLOR.BACKGROUND, borderBottomWidth: 1, borderBottomColor: Global.COLOR.BORDER}}>
+        </View>
+        <GiftedMessenger
+          ref={(c) => this._GiftedMessenger = c}
 
-        styles={{
-          bubbleRight: {
-            marginLeft: 70,
-            backgroundColor: '#007aff',
-          },
-        }}
+          styles={{
+            bubbleRight: {
+              marginLeft: 200,
+              backgroundColor: '#007aff',
+            },
+          }}
 
-        autoFocus={false}
-        messages={this.state.messages}
-        handleSend={this.handleSend.bind(this)}
-        onErrorButtonPress={this.onErrorButtonPress.bind(this)}
-        maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT}
+          autoFocus={false}
+          messages={this.state.messages}
+          handleSend={this.handleSend.bind(this)}
+          onErrorButtonPress={this.onErrorButtonPress.bind(this)}
+          maxHeight={Dimensions.get('window').height - Navigator.NavigationBar.Styles.General.NavBarHeight - STATUS_BAR_HEIGHT - 50}
 
-        loadEarlierMessagesButton={!this.state.allLoaded}
-        onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
+          loadEarlierMessagesButton={!this.state.allLoaded}
+          onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
 
-        senderName='Awesome Developer'
-        senderImage={null}
-        onImagePress={this.onImagePress}
-        displayNames={true}
+          senderName='Awesome Developer'
+          senderImage={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+          onImagePress={this.onImagePress}
+          displayNames={true}
 
-        parseText={true} // enable handlePhonePress, handleUrlPress and handleEmailPress
-        handlePhonePress={this.handlePhonePress}
-        handleUrlPress={this.handleUrlPress}
-        handleEmailPress={this.handleEmailPress}
+          placeholder='Say something nice...'
+          placeholderTextColor={Global.COLOR.LIGHTTEXT}
+          parseText={true} // enable handlePhonePress, handleUrlPress and handleEmailPress
+          handlePhonePress={this.handlePhonePress}
+          handleUrlPress={this.handleUrlPress}
+          handleEmailPress={this.handleEmailPress}
+          displayNamesInsideBubble={true}
+          styles={{
+            bubbleLeft: {
+              marginRight: 70,
+              backgroundColor: 'transparent',
+              alignSelf: 'flex-start',
+            },
+            bubble: {
+              borderRadius: 0,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingBottom: 10,
+              paddingTop: 0,
+            },
+            bubbleRight: {
+              marginLeft: 70,
+              backgroundColor: 'transparent',
+              alignSelf: 'flex-end',
+            },
+            textRight: {
+              color: Global.COLOR.LIGHTTEXT,
+              fontSize: 11,
+              fontStyle: 'italic'
+            },
+            rowContainer: {
+              flexDirection: 'row',
+              paddingHorizontal: 15
+            },
+            image: {
+              alignSelf: 'center',
+              borderRadius: 4,
+              width: 40,
+              height: 40,
+              borderWidth: 1,
+              borderColor: Global.COLOR.BORDER
+            },
+            date: {
+              fontSize: 12,
+              textAlign: 'center',
+              fontWeight: '600',
+              marginTop: 8,
+              marginBottom: 8,
+              fontFamily: Global.FONT.IOS,
+              color: Global.COLOR.BORDER
+            },
+            container: {
+              backgroundColor: Global.COLOR.BACKGROUND
+            },
+            textInputContainer: {
+              height: 60,
+              flexDirection: 'row',
+              paddingLeft: 10,
+              paddingRight: 10,
+              borderTopWidth: 1,
+              alignItems: 'center',
+              borderColor: Global.COLOR.BORDER
+            },
+            textInput: {
+              alignSelf: 'center',
+              height: 30,
+              width: 100,
+              flex: 1,
+              padding: 0,
+              margin: 0,
+              fontSize: 15,
+              color: '#FFF',
+              backgroundColor: 'transparent',
+              fontFamily: Global.FONT.IOS
+            },
+            sendButton: {
+              marginTop: 0,
+              marginLeft: 10,
+              color: '#FFF',
+              fontFamily: Global.FONT.IOS,
+              fontWeight: '500',
+              fontSize: 14
+            },
+            sendButtonDisabled: {
+              color: Global.COLOR.LIGHTTEXT
+            },
+            name: {
+              color: Global.COLOR.LIGHTTEXT,
+              fontSize: 16,
+              marginLeft: 55,
+              marginBottom: 5,
+              fontFamily: Global.FONT.IOS,
+              fontWeight: '600'
+            },
+            text: {
+              color: '#FFF',
+              fontSize: 16,
+              fontWeight: '400',
+              fontFamily: Global.FONT.IOS,
+            },
+            loadEarlierMessagesButton: {
+              color: Global.COLOR.MAIN,
+              fontSize: 14,
+              fontWeight: '600',
+              fontFamily: Global.FONT.IOS,
+            }
+          }}
+          isLoadingEarlierMessages={this.state.isLoadingEarlierMessages}
 
-        isLoadingEarlierMessages={this.state.isLoadingEarlierMessages}
-
-        typingMessage={this.state.typingMessage}
-      />
+          typingMessage={this.state.typingMessage}
+        />
+      </View>
     );
   }
 

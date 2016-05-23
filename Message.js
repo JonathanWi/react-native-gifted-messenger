@@ -8,7 +8,6 @@ import ErrorButton from './ErrorButton';
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    marginBottom: 10,
   },
   name: {
     color: '#aaaaaa',
@@ -78,8 +77,7 @@ export default class Message extends Component {
       if (forceRenderImage) {
         diffMessage = null; // force rendering
       }
-
-      if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name || rowData.uniqueId !== diffMessage.uniqueId))) {
+      if (diffMessage === null || (diffMessage !== null && (rowData.name !== diffMessage.name))) {
         if (typeof onImagePress === 'function') {
           return (
             <TouchableHighlight
@@ -158,13 +156,12 @@ export default class Message extends Component {
     if (rowData.view) {
       RowView = rowData.view;
     }
-
     let messageView = (
       <View>
         {position === 'left' && !this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
         <View
           style={[styles.rowContainer, {
-            justifyContent: position === 'left' ? 'flex-start' : position === 'right' ? 'flex-end' : 'center',
+            justifyContent: position === 'left' ? 'flex-start' : position === 'right' ? 'flex-end' : 'center', marginTop : diffMessage ? (diffMessage.name !== rowData.name ? 10 : 0) : 10, marginLeft : diffMessage ? (diffMessage.name !== rowData.name ? 0 : 10) : 0
           }]}
         >
           {position === 'left' ? this.renderImage(rowData, diffMessage, forceRenderImage, onImagePress) : null}

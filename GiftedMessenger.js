@@ -202,7 +202,7 @@ class GiftedMessenger extends Component {
       text: this.state.text.trim(),
       name: this.props.senderName,
       image: this.props.senderImage,
-      position: 'right',
+      position: 'left',
       date: new Date(),
     };
     if (this.props.onCustomSend) {
