@@ -572,7 +572,9 @@ class GiftedMessenger extends Component {
             returnKeyType={this.props.submitOnReturn ? 'send' : 'default'}
             onSubmitEditing={this.props.submitOnReturn ? this.onSend : () => {}}
             enablesReturnKeyAutomatically={true}
-
+            keyboardAppearance='dark'
+            autoCorrect={this.props.autoCorrect}
+            autoCapitalize={this.props.autoCapitalize}
             blurOnSubmit={this.props.blurOnSubmit}
           />
           <Button
@@ -635,6 +637,8 @@ GiftedMessenger.defaultProps = {
   submitOnReturn: false,
   text: '',
   typingMessage: '',
+  autoCorrect : false,
+  autoCapitalize: 'none'
 };
 
 GiftedMessenger.propTypes = {
