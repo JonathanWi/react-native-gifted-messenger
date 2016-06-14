@@ -52,6 +52,10 @@ export default class Bubble extends React.Component {
       return this.props.renderCustomText(this.props);
     }
 
+    if(this.props.encrypted) {
+      text = new Array(text.length  + 1).join( '*' );
+    }
+
     if (this.props.parseText === true) {
       return (
         <ParsedText

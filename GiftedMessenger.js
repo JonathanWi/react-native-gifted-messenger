@@ -576,6 +576,7 @@ class GiftedMessenger extends Component {
             autoCorrect={this.props.autoCorrect}
             autoCapitalize={this.props.autoCapitalize}
             blurOnSubmit={this.props.blurOnSubmit}
+            keyboardType={this.props.keyboardType}
           />
           <Button
             style={this.styles.sendButton}
@@ -616,6 +617,7 @@ GiftedMessenger.defaultProps = {
   isLoadingEarlierMessages: false,
   keyboardDismissMode: 'interactive',
   keyboardShouldPersistTaps: true,
+  keyboardType: 'default',
   leftControlBar: null,
   loadEarlierMessagesButton: false,
   loadEarlierMessagesButtonText: 'Load earlier messages',
@@ -656,6 +658,7 @@ GiftedMessenger.propTypes = {
   isLoadingEarlierMessages: React.PropTypes.bool,
   keyboardDismissMode: React.PropTypes.string,
   keyboardShouldPersistTaps: React.PropTypes.bool,
+  keyboardType: React.PropTypes.string,
   leftControlBar: React.PropTypes.element,
   loadEarlierMessagesButton: React.PropTypes.bool,
   loadEarlierMessagesButtonText: React.PropTypes.string,
